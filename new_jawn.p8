@@ -36,7 +36,7 @@ function _draw()
 		end
 	end
 	
- phrase("heh.com",8,8)
+ phrase("hey",8,8)
 	sspr(40,0,16,16,32,32+t[i],64,64)
 end
 
@@ -78,7 +78,7 @@ function lttr_index(lttr)
 end
 
 function phrase(string,x,y)
-	for i=0, #string do
+	for i=0, #string -1  do
 		spr(lttr_index(sub(string,i+1,i+1)),x,y,2,2)
 		x += 16
 	end
