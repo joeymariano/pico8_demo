@@ -20,33 +20,23 @@ function _update()
  cls()
  pal(14, 14)
  choose_dir()
- map_speed(4)
+ track_map_speed(4)
  lg_spr_calc()
- if frame >= 32767 then
-  frame = 0
- end	
- frame += 1
+ track_frame()
 end
 
 function _draw()
- if left == true then
-  map(4,4,-63-increm,-63-increm)
- elseif left == false then
-  map(4,4,-63+increm,-63-increm)
- end
+	draw_map()
 	
- if cnt_pattrns >= 4 then
-  if increm % 3 == 0 then
-   pal(14, 8)
-  end
- end
-	
- phrase("nmlstyl",8,8)
+ blink()
  sspr(40,0,16,16,32,32+move[i],64,64)
+
+ phrase("nmlstyl",8,8)
+ 
  phrase("dot com",8,102)
 end
 -->8
-function map_speed(s)
+function track_map_speed(s)
  increm += s
  if increm >= 32 then increm=0 end
 end
@@ -86,6 +76,29 @@ function phrase(string,x,y)
   spr(lttr_index(sub(string,i+1,i+1)),x,y+6*sin(frame/24),2,2)
   x += 16
  end
+end
+
+function draw_map()
+ if left == true then
+  map(4,4,-63-increm,-63-increm)
+ elseif left == false then
+  map(4,4,-63+increm,-63-increm)
+ end
+end
+
+function blink()
+ if cnt_pattrns >= 4 then
+  if increm % 3 == 0 then
+   pal(14, 8)
+  end
+ end	
+end
+
+function track_frame()
+ if frame >= 32767 then
+  frame = 0
+ end	
+ frame += 1
 end
 __gfx__
 00000000000000000000000000000000000000001111100000011111000000000000000000000000000000000000000000000000000000000000000000000000
