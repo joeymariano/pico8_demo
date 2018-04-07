@@ -2,91 +2,90 @@ pico-8 cartridge // http://www.pico-8.com
 version 16
 __lua__
 function _init()
-	palt(1,true)
-	palt(0,false)
-	music(0)
-	increm = 0
-	move = {0,1,2,3,4,5,4,3,2,1,0,-1,-2,-3,-4,-5,-4,-3,-2,-1,0}
-	i = 1
-	left = true
-	debounce = 0
-	cnt_pattrns = 0
-	alpha = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','.',' '}
-	alpha_lookup = {64,66,68,70,72,74,76,78,96,98,100,102,104,106,108,110,128,130,132,134,136,138,140,142,160,162,164,166}
-	frame = 0
+ palt(1,true)
+ palt(0,false)
+ music(0)
+ increm = 0
+ move = {0,1,2,3,4,5,4,3,2,1,0,-1,-2,-3,-4,-5,-4,-3,-2,-1,0}
+ i = 1
+ left = true
+ debounce = 0
+ cnt_pattrns = 0
+ alpha = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','.',' '}
+ alpha_lookup = {64,66,68,70,72,74,76,78,96,98,100,102,104,106,108,110,128,130,132,134,136,138,140,142,160,162,164,166}
+ frame = 0
 end
 
 function _update()
-	cls()
-	pal(14, 14)
-	choose_dir()
-	map_speed(4)
-	lg_spr_calc()
-	if frame >= 32767 then
-		frame = 0
-	end	
-	frame += 1
+ cls()
+ pal(14, 14)
+ choose_dir()
+ map_speed(4)
+ lg_spr_calc()
+ if frame >= 32767 then
+  frame = 0
+ end	
+ frame += 1
 end
 
 function _draw()
-	if left == true then
-		map(4,4,-63-increm,-63-increm)
-	elseif left == false then
-		map(4,4,-63+increm,-63-increm)
-	end
+ if left == true then
+  map(4,4,-63-increm,-63-increm)
+ elseif left == false then
+  map(4,4,-63+increm,-63-increm)
+ end
 	
-	if cnt_pattrns >= 4 then
-		if increm % 3 == 0 then
-			pal(14, 8)
-		end
-	end
+ if cnt_pattrns >= 4 then
+  if increm % 3 == 0 then
+   pal(14, 8)
+  end
+ end
 	
  phrase("nmlstyl",8,8)
-	sspr(40,0,16,16,32,32+move[i],64,64)
+ sspr(40,0,16,16,32,32+move[i],64,64)
+ phrase("dot com",8,102)
 end
-
-
 -->8
 function map_speed(s)
-	increm += s
-	if increm >= 32 then increm=0 end
+ increm += s
+ if increm >= 32 then increm=0 end
 end
 
 function lg_spr_calc()
-	i += 1
-	if i >= 20 then i=1 end
+ i += 1
+ if i >= 20 then i=1 end
 end
 
 function choose_dir()
-	if stat(20) == 0 and debounce >= 4 then
-		if left == true then
-			left = false
-			debounce = 0
-		elseif left == false then
-			left = true
-			debounce = 0
-		end
-		cnt_pattrns += 1
-	end
-	debounce += 1
-	if cnt_pattrns > 7 then
-		cnt_pattrns = 0
-	end
+ if stat(20) == 0 and debounce >= 4 then
+  if left == true then
+   left = false
+   debounce = 0
+  elseif left == false then
+   left = true
+   debounce = 0
+  end
+  cnt_pattrns += 1
+ end
+ debounce += 1
+ if cnt_pattrns > 7 then
+  cnt_pattrns = 0
+ end
 end
 
 function lttr_index(lttr)
-	for k, v in pairs(alpha) do
-		if lttr == v then
-			return alpha_lookup[k]
-		end
-	end 
+ for k, v in pairs(alpha) do
+  if lttr == v then
+   return alpha_lookup[k]
+  end
+ end 
 end
 
 function phrase(string,x,y)
-	for i=0, #string -1  do
-		spr(lttr_index(sub(string,i+1,i+1)),x,y+6*sin(frame/24),2,2)
-		x += 16
-	end
+ for i=0, #string -1  do
+  spr(lttr_index(sub(string,i+1,i+1)),x,y+6*sin(frame/24),2,2)
+  x += 16
+ end
 end
 __gfx__
 00000000000000000000000000000000000000001111100000011111000000000000000000000000000000000000000000000000000000000000000000000000
