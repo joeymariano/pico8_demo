@@ -1,8 +1,8 @@
-NMLSTYL.com
+Pico8 Demo
+======
 
-///// pico8 experiment /////
-
-song and pixel art are copyright joey michalina mariano
+song and pixel art are copyright joey michalina mariano 
+[nmlstyl.com](http://www.nmlstyl.com)
 
 code is creative commons Attribution CC BY
 
