@@ -4,7 +4,7 @@ Pico8 Demo
 song and pixel art are copyright joey michalina mariano 
 [nmlstyl.com](http://www.nmlstyl.com)
 
-# In Action
+## In Action
 
 * click the image to watch a youtube video
 
